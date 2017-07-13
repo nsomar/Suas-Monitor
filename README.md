@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # electron-quick-start
 
 **Clone and run for a quick way to see Electron in action.**
@@ -35,3 +36,6 @@ npm start
 ## License
 
 [CC0 1.0 (Public Domain)](LICENSE.md)
+=======
+# Redux Monitor
+>>>>>>> 0a2a287... Use bonjour to connect to iOS devices

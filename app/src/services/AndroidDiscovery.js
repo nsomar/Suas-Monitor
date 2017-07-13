@@ -1,15 +1,17 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
-const net = require('net')
+import React from 'react';
+import net from 'net';
 
-
-export function devices() {
+export function findAdbDevices(callback) {
     let c = client()
     selectService(c, "host:devices", true, function(result) {
         console.log(result)
+        let devices = result.substring(8).trim().split("\n")
+        devices
+            .map(d => d.split("\t"))
+            .map(d => ({name: d[0], type: d[1]}))
+            .forEach(d => callback(d))
         c.end()
-    }) 
+    })
 }
 
 export function connectToProcess(result) {
@@ -17,9 +19,8 @@ export function connectToProcess(result) {
         let c = client()
         connectDevice(c, function(c1) {
             selectService(c1, "localabstract:" + name, false, function(p){
-                console.log("-> " + p)
                 c1.on('data', function(d){
-                    console.log(ab2str(d))
+                  result(JSON.parse(ab2str(d)))
                 })
             })
         })
@@ -105,6 +106,3 @@ function pad(n, width, z) {
   n = n + '';
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
-
-document.querySelector('#devices').addEventListener('click', devices)
-document.querySelector('#process').addEventListener('click', connectToProcess)
