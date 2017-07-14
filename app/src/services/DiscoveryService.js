@@ -1,22 +1,20 @@
 
-import bonjour from 'bonjour'
-import { findAdbDevices } from './AndroidDiscovery'
+import { findAdbDevices } from './AdbService'
+import { bonjourDiscovery } from './IosService'
 
-export const findDevices = (callback) => {
-    console.log("Looking for Devices")
+export const findIosDevices = (callback) => {
+    console.log("Looking for iOS Devices")
     bonjourDiscovery(callback)
-    //adbDiscovery(callback) // TODO
 }
 
-const bonjourDiscovery = (callback) => {
-    bonjour().find({ type: 'redux-monitor' }, function (service) {
-        callback(service)
-    })
+export const findAndroidDevices = (callback) => {
+    console.log("Looking for Android Devices")
+    adbDiscovery(callback) 
 }
 
 const adbDiscovery = (callback) => {
     findAdbDevices((d) => {
         callback(d)
-        setInterval(() => { adbDiscovery(callback) }, 10000)
+        setInterval(() => { findAdbDevices(callback) }, 2000)
     })
 }

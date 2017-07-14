@@ -1,23 +1,59 @@
 import React, { PropTypes } from 'react';
+import { Card, Table } from 'antd';
 
 export default class DeviceListComponent extends React.Component { 
 
     static propTypes = {
-        devices: PropTypes.array.isRequired,
-        connectToDevice: PropTypes.func.isRequired
+        iosDevices: PropTypes.array.isRequired,
+        androidDevices: PropTypes.array.isRequired,
+        connectToDevice: PropTypes.func.isRequired,
+        selected: PropTypes.string.isRequired
     };
 
-    render() {
-
-        let item = (d) => {
-            return <li key={d.name + d.type} onClick={() => this.props.connectToDevice(d)}>
-                {d.name}
-            </li>
+    onDeviceSelected(record, index, event) {
+        if(record.platform == "Android") {
+            this.props.connectToDevice({type: 'adb', data: record.data})
+        } else if(record.platform == "iOS") {
+            this.props.connectToDevice({type: 'bonjour', data: record.data})
         }
+    }
 
-        return <ul>
-            {this.props.devices.map(d => item(d))}
-        </ul>
+    isSelectedDevice(name) {
+        if(name == this.props.selected) {
+            return "✔"
+        } else{
+            return ""
+        }
+    }
+
+    render() {
+        const columns = [
+        {
+            title: 'Selected',
+            dataIndex: 'selected',
+            key: 'selected',
+        },{
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+        }, {
+            title: 'Type',
+            dataIndex: 'type',
+            key: 'type',
+        }, {
+            title: 'Platform',
+            dataIndex: 'platform',
+            key: 'platform',
+        }];
+
+        const dataSource = [
+            ...this.props.androidDevices.map(d => ({name: d.name, type: d.type, platform: "Android", data: d, selected: this.isSelectedDevice(d.name)})),
+            ...this.props.iosDevices.map(d => ({name: d.name, type: d.type, platform: "iOS", data: d, selected: this.isSelectedDevice(d.name)}))
+        ]
+
+        return <Card bordered={false} style={{ width: 400, margin: '20px'}}>
+            <Table dataSource={dataSource} columns={columns} pagination={false} onRowClick={this.onDeviceSelected.bind(this)}/>
+        </Card>
     }
 
 }

@@ -1,18 +1,19 @@
 import { connect } from 'react-redux';
-import { deviceFoundAction } from '../actions';
+import { deviceFoundAndroid, deviceFoundiOS } from '../actions';
 
 import DeviceDiscoveryComponent from '../components/DeviceDiscoveryComponent'
 
 const mapStateToProps = (state, ownProps) => {
-    return {
-
-    }
+    return {    }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return { 
-        deviceFound: (device) => {
-            dispatch(deviceFoundAction(device))
+        deviceFoundAndroid: (devices) => {
+            dispatch(deviceFoundAndroid(devices))
+        },
+        deviceFoundiOS: (device) => {
+            dispatch(deviceFoundiOS(device))
         }
     }
 }

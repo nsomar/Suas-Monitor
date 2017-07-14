@@ -4,39 +4,35 @@ import net from 'net';
 export function findAdbDevices(callback) {
     let c = client()
     selectService(c, "host:devices", true, function(result) {
-        console.log(result)
         let devices = result.substring(8).trim().split("\n")
-        devices
             .map(d => d.split("\t"))
             .map(d => ({name: d[0], type: d[1]}))
-            .forEach(d => callback(d))
+        callback(devices)
         c.end()
     })
 }
 
-export function connectToProcess(result) {
-    getProcessName(function(name) {
+export function connectToProcess(device, result) {
+    getProcessName(device, function(name) {
         let c = client()
-        connectDevice(c, function(c1) {
+        connectDevice(c, device, function(c1) {
             selectService(c1, "localabstract:" + name, false, function(p){
-                c1.on('data', function(d){
-                  result(JSON.parse(ab2str(d)))
-                })
+                result(c1)
             })
         })
     })
 }
 
-function getProcessName(result) {
+function getProcessName(device, result) {
     let c = client()
-    findProcess(c, function(name){
+    findProcess(c, device, function(name){
         c.end()
         result(name)
     })
 }
 
-function findProcess(c, result) {
-    connectDevice(c, function(c1){
+function findProcess(c, device, result) {
+    connectDevice(c, device, function(c1){
         selectService(c1, "shell:cat /proc/net/unix", true, function(d){
             let processes = d.split('\n')
             for(var i = 0; i < processes.length; i++) {
@@ -60,10 +56,10 @@ function findProcess(c, result) {
     })
 }
 
-function connectDevice(c, done) {
-  selectService(c, "host:transport-any", false, function(result) {
-    done(c)
-  }) 
+function connectDevice(c, device, done) {
+    selectService(c, "host:transport:" + device, false, function(result) {
+        done(c) //transport-any
+    }) 
 }
 
 function selectService(socket, service, waitForEnd, result) {

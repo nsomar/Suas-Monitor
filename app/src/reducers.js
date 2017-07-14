@@ -1,12 +1,21 @@
 import { combineReducers } from 'redux';
-import { DEVICE_DISCOVERED, CONNECT_DEVICE, DISCONNECT_DEVICE } from './actions'
+import { DEVICE_DISCOVERED_IOS, DEVICE_DISCOVERED_ANDROID, CONNECT_DEVICE, DISCONNECT_DEVICE } from './actions'
 
-function connection(state = {devices: [], connect: {}}, action) { 
+function connection(state = {devicesAndroid: [], devicesiOS: [], connect: {data:{}}}, action) { 
     switch(action.type){
-        case DEVICE_DISCOVERED:
+
+        case DEVICE_DISCOVERED_ANDROID:
             return {
                 ...state,
-                devices: [...state.devices, action.device]
+                devicesAndroid: [...action.devices]
+            }
+
+        case DEVICE_DISCOVERED_IOS:
+            let devices = [...state.devicesiOS, action.device]
+
+            return {
+                ...state,
+                devicesiOS: devices
             }
 
         case CONNECT_DEVICE: 

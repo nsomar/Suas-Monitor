@@ -1,11 +1,20 @@
 
-export const DEVICE_DISCOVERED = 'DEVICE_DISCOVERED'
+export const DEVICE_DISCOVERED_ANDROID = 'DEVICE_DISCOVERED_ANDROID'
+export const DEVICE_DISCOVERED_IOS = 'DEVICE_DISCOVERED_IOS'
+
 export const CONNECT_DEVICE = 'CONNECT_DEVICE'
 export const DISCONNECT_DEVICE = 'DISCONNECT_DEVICE'
 
-export function deviceFoundAction(device) {
+export function deviceFoundAndroid(devices) {
   return { 
-      type: DEVICE_DISCOVERED,
+      type: DEVICE_DISCOVERED_ANDROID,
+      devices
+    }
+}
+
+export function deviceFoundiOS(device) {
+  return { 
+      type: DEVICE_DISCOVERED_IOS,
       device
     }
 }
