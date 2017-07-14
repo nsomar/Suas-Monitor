@@ -4,7 +4,7 @@
   "description": "Monitor Redux for native Apps",
   "main": "main.js",
   "scripts": {
-    "dev": "webpack",
+    "dev": "concurrently 'webpack --watch' 'electron .'",
     "start": "electron ."
   },
   "keywords": [
@@ -35,7 +35,9 @@
     "antd": "^2.12.0",
     "babel-plugin-import": "^1.2.1",
     "bonjour": "^3.5.0",
+    "concurrently": "^3.5.0",
     "electron-prebuilt": "^1.4.13",
+    "inline-style-prefixer": "^3.0.6",
     "json-socket": "^0.3.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
