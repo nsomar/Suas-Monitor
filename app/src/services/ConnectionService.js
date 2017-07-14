@@ -10,7 +10,7 @@ export const connectToDevice = (type, device, callback) => {
             listenToSocket(socket, callback)
         })
     } else if (type == 'bonjour') {
-        listenToSocket(openSocketToIOS(device.host, device.port))
+        listenToSocket(openSocketToIOS(device.host, device.port), callback)
     }
 }
 
@@ -26,7 +26,8 @@ const listenToSocket = (socket, callback) => {
     socket.on('data', (d) => {
         let string = ab2str(d)
         if(string.endsWith("\r\r")) {
-            let json = JSON.parse(buffer + string)
+            let rawJson = buffer + string.replace("\r\r", "")
+            let json = JSON.parse(rawJson)
             callback(json)
             buffer = ""
         } else {

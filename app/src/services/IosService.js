@@ -11,7 +11,6 @@ export const bonjourDiscovery = (callback) => {
 
 export const openSocketToIOS = (address, port) => {
     let socket = new net.Socket()
-    console.log("computer", address, port)
-    socket.connect(address, port)
+    socket.connect(port, address)
     return socket
 }

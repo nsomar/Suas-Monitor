@@ -44,9 +44,10 @@ export default class ReduxMonitorComponent extends React.Component {
             })
 
             connectToDevice(nextProps.device.type, nextProps.device.data, (data) => {
+
                 let newState = data["state"]
                 let actionType = data["action"]
-                let actionData = data["actionData"]
+                let actionData = data["actionData"] || {}
                 
                 this.state.store.dispatch({type: actionType, data: {
                     actionData: actionData,
@@ -90,9 +91,7 @@ export default class ReduxMonitorComponent extends React.Component {
     }
 
     render() {
-        
         let DevTools = this.state.devtools
-        console.log(DevTools)
         return <Provider store={this.state.store}><DevTools /></Provider>
     }
 }
