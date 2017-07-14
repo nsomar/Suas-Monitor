@@ -38,4 +38,13 @@ npm start
 [CC0 1.0 (Public Domain)](LICENSE.md)
 =======
 # Redux Monitor
+<<<<<<< HEAD
 >>>>>>> 0a2a287... Use bonjour to connect to iOS devices
+=======
+
+## Installation
+
+- git clone
+- `npm install`
+- `npm run dev`
+>>>>>>> 3ab918f... Update README.md
