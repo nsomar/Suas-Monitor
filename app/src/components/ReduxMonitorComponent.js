@@ -82,7 +82,7 @@ export default class ReduxMonitorComponent extends React.Component {
                     defaultIsVisible={true}
                     defaultSize={0.65}
                     >
-                <ChartMonitor transitionDuration={500} />
+                <ChartMonitor transitionDuration={500} heightBetweenNodesCoeff={2} widthBetweenNodesCoeff={0.8} />
                 <Inspector />
                 <LogMonitor />
                 <DiffMonitor />

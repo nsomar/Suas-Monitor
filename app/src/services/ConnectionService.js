@@ -25,11 +25,28 @@ const listenToSocket = (socket, callback) => {
     var buffer = ""
     socket.on('data', (d) => {
         let string = ab2str(d)
-        if(string.endsWith("\r\r")) {
-            let rawJson = buffer + string.replace("\r\r", "")
-            let json = JSON.parse(rawJson)
-            callback(json)
+        
+        if(string.includes("&&__&&__&&")) {
+            let rawJson = (buffer + string).trim()
             buffer = ""
+            
+            let split = rawJson.split("&&__&&__&&")
+            let items;
+            if(split[split.length - 1].trim() == '') {
+                items = split
+            } else {
+                buffer = split[split.length - 1]
+                items = split.slice(0, split.length - 1)
+            }
+            
+            if(items.length > 0) {
+                console.log(items)
+                items
+                    .filter(d => d != '')
+                    .map(j => JSON.parse(j))
+                    .forEach(d => callback(d))
+            }
+
         } else {
             buffer += string
         }

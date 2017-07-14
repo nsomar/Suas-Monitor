@@ -28,7 +28,7 @@ export default class DeviceListComponent extends React.Component {
 
     render() {
         const columns = [
-        {
+        {   
             title: 'Selected',
             dataIndex: 'selected',
             key: 'selected',
@@ -37,21 +37,17 @@ export default class DeviceListComponent extends React.Component {
             dataIndex: 'name',
             key: 'name',
         }, {
-            title: 'Type',
-            dataIndex: 'type',
-            key: 'type',
-        }, {
             title: 'Platform',
             dataIndex: 'platform',
             key: 'platform',
         }];
 
         const dataSource = [
-            ...this.props.androidDevices.map(d => ({name: d.name, type: d.type, platform: "Android", data: d, selected: this.isSelectedDevice(d.name)})),
-            ...this.props.iosDevices.map(d => ({name: d.name, type: d.type, platform: "iOS", data: d, selected: this.isSelectedDevice(d.name)}))
+            ...this.props.androidDevices.map((d, i) => ({key: i + d.name, name: d.name, platform: "Android", data: d, selected: this.isSelectedDevice(d.name)})),
+            ...this.props.iosDevices.map((d, i) => ({key: i + d.name, name: d.name, platform: "iOS", data: d, selected: this.isSelectedDevice(d.name)}))
         ]
 
-        return <Card bordered={false} style={{ width: 400, margin: '20px'}}>
+        return <Card bordered={false} style={{ width: 500, margin: '20px'}}>
             <Table dataSource={dataSource} columns={columns} pagination={false} onRowClick={this.onDeviceSelected.bind(this)}/>
         </Card>
     }
