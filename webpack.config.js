@@ -1,18 +1,19 @@
 
 module.exports = {
-
-    watch: true,
-
     target: 'electron',
 
-    entry: './app/src/index.js',
+    entry: './app/src/index.tsx',
 
     output: {
         filename: './app/build/bundle.js'
     },
-
+    resolve: {
+        // Add `.ts` and `.tsx` as a resolvable extension.
+        extensions: ['.ts', '.tsx', '.js'] // note if using webpack 1 you'd also need a '' in the array as well
+    },
     module: {
         rules: [
+            { test: /\.tsx?$/, loaders: ['babel-loader', 'ts-loader'] },
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
@@ -21,7 +22,7 @@ module.exports = {
                     presets: ['react']
                 }
             },
-            { 
+            {
                 test: /\.css$/, loader: "style-loader!css-loader"
             },
             {
