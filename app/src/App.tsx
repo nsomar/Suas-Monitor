@@ -1,3 +1,5 @@
+import 'milligram'
+import 'normalize.css'
 import React = require('react')
 import DeviceDiscovery from './containers/DeviceDiscovery'
 import DeviceList from './containers/DeviceList'
