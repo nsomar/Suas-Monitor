@@ -1,4 +1,6 @@
-# Redux Monitor
+# Suas Monitor
+
+![Screenshot](/misc/logo.png?raw=true)
 
 ### Installation  
 

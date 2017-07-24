@@ -9,17 +9,20 @@ const TableRow = styled.tr`
 interface IDeviceListComponentProps {
   iosDevices: Array<any>,
   androidDevices: Array<any>,
-  connectToDevice: ({ }) => {},
+  connectToDevice?: ({ }) => {},
   selected: string
 }
 
 export default class DeviceListComponent extends React.Component<IDeviceListComponentProps, any> {
   onDeviceSelected = (item: any) => {
     const { data, platform } = item
-    this.props.connectToDevice({
-      type: platform === 'Android' ? 'adb' : 'bonjour',
-      data
-    })
+
+    if (this.props.connectToDevice) {
+      this.props.connectToDevice({
+        type: platform === 'Android' ? 'adb' : 'bonjour',
+        data
+      })
+    }
   }
 
   isSelectedDevice (name) {
