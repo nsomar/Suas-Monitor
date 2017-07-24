@@ -60,10 +60,12 @@ export default class ReduxMonitorComponent extends React.Component<IReduxMonitor
 
   createMirrorStore (devtools) {
     let reducer: Reducer<any> = (state = { data: {} }, action) => {
+      const { data } = action
+
       if (action.type === 'RESET') {
         return {}
-      } else if (action.data && action.data['newState'] && action.data['actionData']) {
-        return Object.assign({}, state, { data: action.data['newState'] })
+      } else if (data && data.newState && data.actionData) {
+        return {...state, data: action.data['newState'] }
       }
 
       return state
@@ -79,7 +81,7 @@ export default class ReduxMonitorComponent extends React.Component<IReduxMonitor
         changePositionKey='ctrl-q'
         changeMonitorKey='ctrl-m'
         defaultIsVisible={true}
-        defaultSize={0.65}
+        defaultSize={0.5}
       >
         <ChartMonitor transitionDuration={500} />
         <Inspector />

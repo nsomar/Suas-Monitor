@@ -1,5 +1,10 @@
 import React = require('react')
-import { Card, Table } from 'antd'
+import styled from 'styled-components'
+
+const TableRow = styled.tr`
+  padding: 4em;
+  background: ${props => props.selected ? '#F4F5F6' : 'white' };
+`
 
 interface IDeviceListComponentProps {
   iosDevices: Array<any>,
@@ -9,53 +14,50 @@ interface IDeviceListComponentProps {
 }
 
 export default class DeviceListComponent extends React.Component<IDeviceListComponentProps, any> {
-  onDeviceSelected = (record, index, event) => {
-    switch (record.platform) {
-      case 'Android':
-        this.props.connectToDevice({ type: 'adb', data: record.data })
-        break
-      case 'iOS':
-        this.props.connectToDevice({ type: 'bonjour', data: record.data })
-        break
-    }
+  onDeviceSelected = (item: any) => {
+    const { data, platform } = item
+    this.props.connectToDevice({
+      type: platform === 'Android' ? 'adb' : 'bonjour',
+      data
+    })
   }
 
   isSelectedDevice (name) {
-    return name === this.props.selected ? '✔' : ''
+    return name === this.props.selected
   }
 
   render () {
-    const dataSource = [
-      ...this.props.androidDevices.map(d => ({ name: d.name, type: d.type, platform: 'Android', data: d, selected: this.isSelectedDevice(d.name) })),
-      ...this.props.iosDevices.map(d => ({ name: d.name, type: d.type, platform: 'iOS', data: d, selected: this.isSelectedDevice(d.name) }))
+    const { androidDevices, iosDevices } = this.props
+    const datasource = [
+      ...androidDevices.map(d => ({ name: d.name, type: d.type, platform: 'Android', data: d, selected: this.isSelectedDevice(d.name) })),
+      ...iosDevices.map(d => ({ name: d.name, type: d.type, platform: 'iOS', data: d, selected: this.isSelectedDevice(d.name) }))
     ]
 
-    return <Card bordered={false} style={{ width: 400, margin: '20px' }}>
-      <Table
-        dataSource={dataSource}
-        columns={columns}
-        pagination={false}
-        onRowClick={this.onDeviceSelected}
-      />
-    </Card>
+    return <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Platform</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            datasource.map((item, i) => <TableRow
+              onClick={() => {
+                this.onDeviceSelected(item)
+              }}
+              key={i}
+              selected={item.selected}
+            >
+              <td>{item.name}</td>
+              <td>{item.type}</td>
+              <td>{item.platform}</td>
+            </TableRow>)
+          }
+        </tbody>
+      </table>
+    </div>
   }
 }
-
-const columns = [
-  {
-    title: 'Selected',
-    dataIndex: 'selected',
-    key: 'selected'
-  }, {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name'
-  }, {
-    title: 'Type',
-    dataIndex: 'type',
-    key: 'type'
-  }, {
-    title: 'Platform',
-    dataIndex: 'platform',
-    key: 'platform'
-  }]
