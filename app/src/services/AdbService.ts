@@ -61,26 +61,26 @@ function connectDevice (c, device, done) {
   })
 }
 
-function selectService (socket, service, waitForEnd, result) {
+function selectService (socket: net.Socket, service, waitForEnd, result) {
   let msg = pad(service.length.toString(16), 4) + service
-  socket.write(msg)
-
   let endResult = ''
 
-  let listener = function (data) {
+  socket.write(msg)
+
+  let end = listenerParam => {
+    socket.removeListener('data', listenerParam)
+    socket.removeListener('end', end)
+    result(endResult)
+  }
+
+  let listener = data => {
     let output = ab2str(data)
     if (!waitForEnd) {
-      end()
+      end(listener)
       return
     }
 
     endResult += output
-  }
-
-  let end = function () {
-    socket.removeListener('data', listener)
-    socket.removeListener('end', end)
-    result(endResult)
   }
 
   socket.on('data', listener)

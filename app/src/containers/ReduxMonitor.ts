@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import ReduxMonitorComponent from '../components/ReduxMonitorComponent'
-import { connectToDevice } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders device list 1`] = `
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Platform
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+</div>
+`;

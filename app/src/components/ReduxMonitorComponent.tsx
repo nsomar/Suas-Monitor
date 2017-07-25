@@ -27,11 +27,6 @@ export default class ReduxMonitorComponent extends React.Component<IReduxMonitor
     this.connectionService = new ConnectionService()
   }
 
-  componentDidMount () {
-    const devtools = this.getDevTools()
-    let store = this.createMirrorStore(devtools)
-  }
-
   componentWillUpdate (nextProps, nextState) {
     if (!(JSON.stringify(nextState.device) === JSON.stringify(nextProps.device))) {
       console.log('CREATE STORE AND STUFF')
