@@ -1,5 +1,4 @@
 import React = require('react')
-import LogMonitor from 'redux-devtools-log-monitor'
 import DockMonitor from 'redux-devtools-dock-monitor'
 import Inspector from 'redux-devtools-inspector'
 import ChartMonitor from 'redux-devtools-chart-monitor'
@@ -78,9 +77,8 @@ export default class ReduxMonitorComponent extends React.Component<IReduxMonitor
         defaultIsVisible={true}
         defaultSize={0.5}
       >
-        <ChartMonitor transitionDuration={500} />
+        <ChartMonitor transitionDuration={500} widthBetweenNodesCoeff={0.5} heightBetweenNodesCoeff={1.5} />
         <Inspector />
-        <LogMonitor />
         <DiffMonitor />
       </DockMonitor>
     )
