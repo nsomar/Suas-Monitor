@@ -14,10 +14,10 @@ function connection (state = { devicesAndroid: [], devicesiOS: [], connect: { da
 
     case DEVICE_DISCOVERED_IOS:
       // Remove old device with same fqdn
-      var devicesiOS = state.devicesiOS
-      devicesiOS = devicesiOS.filter((d) => { return d.fqdn != action.device.fqdn })
+      let newDevicesiOS = state.devicesiOS
+      newDevicesiOS = newDevicesiOS.filter((d: any) => { return d.fqdn !== action.device.fqdn })
 
-      let devices = [...devicesiOS, action.device]
+      let devices = [...newDevicesiOS, action.device]
 
       return {
         ...state,
@@ -31,12 +31,12 @@ function connection (state = { devicesAndroid: [], devicesiOS: [], connect: { da
       }
 
     case DISCONNECT_DEVICE:
-      var devicesiOS = state.devicesiOS
-      var devicesAndroid = state.devicesAndroid
+      let devicesiOS = state.devicesiOS
+      let devicesAndroid = state.devicesAndroid
 
-      if (action.deviceType == "bonjour") {
-        devicesiOS = devicesiOS.filter((d) => { return d.fqdn != action.device.fqdn })
-        devicesAndroid = devicesAndroid.filter((d) => { return d.fqdn != action.device.fqdn })
+      if (action.deviceType === 'bonjour') {
+        devicesiOS = devicesiOS.filter((d: any) => { return d.fqdn !== action.device.fqdn })
+        devicesAndroid = devicesAndroid.filter((d: any) => { return d.fqdn !== action.device.fqdn })
       }
 
       return {

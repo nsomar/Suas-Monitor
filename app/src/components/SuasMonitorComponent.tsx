@@ -4,10 +4,9 @@ import Inspector from 'redux-devtools-inspector'
 import ChartMonitor from 'redux-devtools-chart-monitor'
 import DiffMonitor from 'redux-devtools-diff-monitor'
 import { Provider } from 'react-redux'
-import { createDevTools, ActionCreators } from 'redux-devtools'
+import { createDevTools } from 'redux-devtools'
 import { createStore, compose, Reducer } from 'redux'
 import ConnectionService from '../services/ConnectionService'
-const { reset } = ActionCreators
 
 interface ISuasMonitorComponentProps {
   device: any
@@ -61,7 +60,7 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
         (type, device) => {
           nextProps.disconnect(type, device)
         }
-      )      
+      )
     } else {
       // Other? device disconnectedx
       this.setState({
@@ -72,7 +71,7 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
 
   }
 
-  createMirrorStore (devtools)   {
+  createMirrorStore (devtools) {
     let reducer: Reducer<any> = (state = { data: {} }, action) => {
       const { data } = action
 

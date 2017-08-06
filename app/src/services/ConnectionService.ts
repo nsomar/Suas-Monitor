@@ -5,7 +5,7 @@ export default class ConnectionService {
   connection?: any
 
   connectToDevice = (type, device, onData, onCloseConnection) => {
-        
+
     if (type === 'adb') {
       connectToProcess(device.name, (socket) => {
         this.listenToSocket(socket, onData)
@@ -22,7 +22,7 @@ export default class ConnectionService {
   }
 
   listenToDisconnect = (socket, type, device, callback) => {
-    socket.on('close', (error) => {
+    socket.on('close', (_) => {
       callback(type, device)
     })
   }
