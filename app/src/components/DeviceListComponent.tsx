@@ -7,7 +7,7 @@ const TableRow = styled.tr`
 `
 
 interface IDeviceListComponentProps {
-  iosDevices: Array<any>,
+  bonjourDevices: Array<any>,
   androidDevices: Array<any>,
   connectToDevice?: ({ }) => {},
   selected: string
@@ -30,10 +30,10 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
   }
 
   render () {
-    const { androidDevices, iosDevices } = this.props
+    const { androidDevices, bonjourDevices } = this.props
     const datasource = [
       ...androidDevices.map(d => ({ name: d.name, platform: 'Android', data: d, selected: this.isSelectedDevice(d.name) })),
-      ...iosDevices.map(d => ({ name: d.name, platform: 'iOS', data: d, selected: this.isSelectedDevice(d.name) }))
+      ...bonjourDevices.map(d => ({ name: d.name, platform: 'Bonjour', data: d, selected: this.isSelectedDevice(d.name) }))
     ]
 
     return <div>
