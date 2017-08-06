@@ -1,5 +1,5 @@
 import { connectToProcess } from './AdbService'
-import { openSocketToIOS } from './IosService'
+import { openSocketToBonjour } from './BonjourService'
 
 export default class ConnectionService {
   connection?: any
@@ -11,7 +11,7 @@ export default class ConnectionService {
         this.listenToSocket(socket, onData)
       })
     } else if (type === 'bonjour') {
-      let socket = openSocketToIOS(device.host, device.port)
+      let socket = openSocketToBonjour(device.host, device.port)
       this.listenToSocket(socket, onData)
       this.listenToDisconnect(socket, type, device, onCloseConnection)
     }

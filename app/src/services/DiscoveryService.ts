@@ -1,5 +1,5 @@
 import { findAdbDevices } from './AdbService'
-import { bonjourDiscovery } from './IosService'
+import { bonjourDiscovery } from './BonjourService'
 
 const adbDiscovery = callback => {
   findAdbDevices(d => {
@@ -8,8 +8,8 @@ const adbDiscovery = callback => {
   })
 }
 
-export const findIosDevices = callback => {
-  console.log('Looking for iOS Devices')
+export const findBonjourDevices = callback => {
+  console.log('Looking for Bonjour Devices')
   bonjourDiscovery(callback)
 }
 

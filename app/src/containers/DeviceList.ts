@@ -5,7 +5,7 @@ import { connectToDevice } from '../actions'
 const mapStateToProps = (state, ownProps) => {
   return {
     androidDevices: state.connection.devicesAndroid,
-    iosDevices: state.connection.devicesiOS,
+    bonjourDevices: state.connection.devicesBonjour,
     selected: state.connection.connect.data.name || ''
   }
 }

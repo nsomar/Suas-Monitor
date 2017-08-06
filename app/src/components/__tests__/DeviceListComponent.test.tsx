@@ -5,7 +5,7 @@ import DeviceListComponent from '../DeviceListComponent'
 test('renders device list', () => {
   const component = renderer.create(
     <DeviceListComponent
-      iosDevices={[]}
+      bonjourDevices={[]}
       androidDevices={[]}
       selected='test'
     />

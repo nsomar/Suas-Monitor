@@ -1,5 +1,5 @@
 export const DEVICE_DISCOVERED_ANDROID = 'DEVICE_DISCOVERED_ANDROID'
-export const DEVICE_DISCOVERED_IOS = 'DEVICE_DISCOVERED_IOS'
+export const DEVICE_DISCOVERED_BONJOUR = 'DEVICE_DISCOVERED_BONJOUR'
 export const CONNECT_DEVICE = 'CONNECT_DEVICE'
 export const DISCONNECT_DEVICE = 'DISCONNECT_DEVICE'
 
@@ -9,9 +9,9 @@ export function deviceFoundAndroid (devices) {
   }
 }
 
-export function deviceFoundiOS (device) {
+export function deviceFoundBonjour (device) {
   return {
-    type: DEVICE_DISCOVERED_IOS,
+    type: DEVICE_DISCOVERED_BONJOUR,
     device
   }
 }
