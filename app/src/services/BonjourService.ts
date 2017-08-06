@@ -5,7 +5,7 @@ export const bonjourDiscovery = callback => {
   bonjour.find({ type: 'suas-monitor' }, callback)
 }
 
-export const openSocketToIOS = (address, port) => {
+export const openSocketToBonjour = (address, port) => {
   let socket = new net.Socket()
   socket.connect(port, address)
 

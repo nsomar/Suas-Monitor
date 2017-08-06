@@ -1,10 +1,10 @@
 import React = require('react')
-import { findAndroidDevices, findIosDevices } from '../services/DiscoveryService'
+import { findAndroidDevices, findBonjourDevices } from '../services/DiscoveryService'
 
 export default class DeviceDiscoveryComponent extends React.Component<IDeviceDiscoveryComponentProps, any> {
   componentDidMount () {
     findAndroidDevices(device => this.props.deviceFoundAndroid(device))
-    findIosDevices(device => this.props.deviceFoundiOS(device))
+    findBonjourDevices(device => this.props.deviceFoundBonjour(device))
   }
 
   render () {
@@ -14,5 +14,5 @@ export default class DeviceDiscoveryComponent extends React.Component<IDeviceDis
 
 interface IDeviceDiscoveryComponentProps {
   deviceFoundAndroid: (device: any) => {}
-  deviceFoundiOS: (device: any) => {}
+  deviceFoundBonjour: (device: any) => {}
 }

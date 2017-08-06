@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 import {
-  DEVICE_DISCOVERED_IOS, DEVICE_DISCOVERED_ANDROID, CONNECT_DEVICE, DISCONNECT_DEVICE
+  DEVICE_DISCOVERED_BONJOUR, DEVICE_DISCOVERED_ANDROID, CONNECT_DEVICE, DISCONNECT_DEVICE
 } from './actions'
 
-function connection (state = { devicesAndroid: [], devicesiOS: [], connect: { data: {} } }, action) {
+function connection (state = { devicesAndroid: [], devicesBonjour: [], connect: { data: {} } }, action) {
   switch (action.type) {
 
     case DEVICE_DISCOVERED_ANDROID:
@@ -12,16 +12,13 @@ function connection (state = { devicesAndroid: [], devicesiOS: [], connect: { da
         devicesAndroid: [...action.devices]
       }
 
-    case DEVICE_DISCOVERED_IOS:
+    case DEVICE_DISCOVERED_BONJOUR:
       // Remove old device with same fqdn
-      let newDevicesiOS = state.devicesiOS
-      newDevicesiOS = newDevicesiOS.filter((d: any) => { return d.fqdn !== action.device.fqdn })
-
-      let devices = [...newDevicesiOS, action.device]
+      let devices = [...removeDevice(state.devicesBonjour, action.device), action.device]
 
       return {
         ...state,
-        devicesiOS: devices
+        devicesBonjour: devices
       }
 
     case CONNECT_DEVICE:
@@ -31,24 +28,20 @@ function connection (state = { devicesAndroid: [], devicesiOS: [], connect: { da
       }
 
     case DISCONNECT_DEVICE:
-      let devicesiOS = state.devicesiOS
-      let devicesAndroid = state.devicesAndroid
-
-      if (action.deviceType === 'bonjour') {
-        devicesiOS = devicesiOS.filter((d: any) => { return d.fqdn !== action.device.fqdn })
-        devicesAndroid = devicesAndroid.filter((d: any) => { return d.fqdn !== action.device.fqdn })
-      }
-
       return {
         ...state,
-        devicesAndroid: devicesAndroid,
-        devicesiOS: devicesiOS,
+        devicesAndroid: state.devicesAndroid,
+        devicesBonjour: removeDevice(state.devicesBonjour, action.device),
         connect: { ...state.connect, data: {}}
       }
 
     default:
       return state
   }
+}
+
+function removeDevice (devices, device) {
+  return devices.filter((d: any) => { return d.fqdn !== device.fqdn })
 }
 
 const SuasMonitorReducer = combineReducers({ connection })
