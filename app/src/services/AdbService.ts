@@ -40,7 +40,7 @@ function findProcess (c, device, result) {
           continue
         }
 
-        if (!cols[7].startsWith('@redux_monitor')) {
+        if (!cols[7].startsWith('@suas_monitor')) {
           continue
         }
 

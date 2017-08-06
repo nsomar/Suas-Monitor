@@ -2,10 +2,11 @@ import React = require('react')
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './App'
-import { createStore } from 'redux'
-import reduxMonitorReducer from './reducers'
+import { createStore, applyMiddleware } from 'redux'
+import SuasMonitorReducer from './reducers'
+import logger from 'redux-logger'
 
-const store = createStore(reduxMonitorReducer)
+const store = createStore(SuasMonitorReducer, applyMiddleware(logger))
 
 render(<Provider store={store}>
   <App />

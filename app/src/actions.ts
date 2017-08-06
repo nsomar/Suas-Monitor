@@ -23,8 +23,10 @@ export function connectToDevice (device) {
   }
 }
 
-export function disconnect () {
+export function disconnect (type, device) {
   return {
-    type: DISCONNECT_DEVICE
+    type: DISCONNECT_DEVICE,
+    deviceType: type,
+    device
   }
 }
