@@ -9,9 +9,6 @@ exports[`renders device list 1`] = `
           Name
         </th>
         <th>
-          Type
-        </th>
-        <th>
           Platform
         </th>
       </tr>

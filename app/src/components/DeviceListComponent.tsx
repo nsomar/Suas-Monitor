@@ -32,8 +32,8 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
   render () {
     const { androidDevices, iosDevices } = this.props
     const datasource = [
-      ...androidDevices.map(d => ({ name: d.name, type: d.type, platform: 'Android', data: d, selected: this.isSelectedDevice(d.name) })),
-      ...iosDevices.map(d => ({ name: d.name, type: d.type, platform: 'iOS', data: d, selected: this.isSelectedDevice(d.name) }))
+      ...androidDevices.map(d => ({ name: d.name, platform: 'Android', data: d, selected: this.isSelectedDevice(d.name) })),
+      ...iosDevices.map(d => ({ name: d.name, platform: 'iOS', data: d, selected: this.isSelectedDevice(d.name) }))
     ]
 
     return <div>
@@ -41,7 +41,6 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
         <thead>
           <tr>
             <th>Name</th>
-            <th>Type</th>
             <th>Platform</th>
           </tr>
         </thead>
@@ -55,7 +54,6 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
               selected={item.selected}
             >
               <td>{item.name}</td>
-              <td>{item.type}</td>
               <td>{item.platform}</td>
             </TableRow>)
           }

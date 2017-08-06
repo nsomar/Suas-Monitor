@@ -4,18 +4,27 @@ import { openSocketToIOS } from './IosService'
 export default class ConnectionService {
   connection?: any
 
-  connectToDevice = (type, device, callback) => {
+  connectToDevice = (type, device, onData, onCloseConnection) => {
+
     if (type === 'adb') {
       connectToProcess(device.name, (socket) => {
-        this.listenToSocket(socket, callback)
+        this.listenToSocket(socket, onData)
       })
     } else if (type === 'bonjour') {
-      this.listenToSocket(openSocketToIOS(device.host, device.port), callback)
+      let socket = openSocketToIOS(device.host, device.port)
+      this.listenToSocket(socket, onData)
+      this.listenToDisconnect(socket, type, device, onCloseConnection)
     }
   }
 
   closeConnection = () => {
     if (this.connection) this.connection.end()
+  }
+
+  listenToDisconnect = (socket, type, device, callback) => {
+    socket.on('close', (_) => {
+      callback(type, device)
+    })
   }
 
   listenToSocket = (socket, callback) => {

@@ -5,6 +5,7 @@ import {
 
 function connection (state = { devicesAndroid: [], devicesiOS: [], connect: { data: {} } }, action) {
   switch (action.type) {
+
     case DEVICE_DISCOVERED_ANDROID:
       return {
         ...state,
@@ -12,7 +13,11 @@ function connection (state = { devicesAndroid: [], devicesiOS: [], connect: { da
       }
 
     case DEVICE_DISCOVERED_IOS:
-      let devices = [...state.devicesiOS, action.device]
+      // Remove old device with same fqdn
+      let newDevicesiOS = state.devicesiOS
+      newDevicesiOS = newDevicesiOS.filter((d: any) => { return d.fqdn !== action.device.fqdn })
+
+      let devices = [...newDevicesiOS, action.device]
 
       return {
         ...state,
@@ -26,9 +31,19 @@ function connection (state = { devicesAndroid: [], devicesiOS: [], connect: { da
       }
 
     case DISCONNECT_DEVICE:
+      let devicesiOS = state.devicesiOS
+      let devicesAndroid = state.devicesAndroid
+
+      if (action.deviceType === 'bonjour') {
+        devicesiOS = devicesiOS.filter((d: any) => { return d.fqdn !== action.device.fqdn })
+        devicesAndroid = devicesAndroid.filter((d: any) => { return d.fqdn !== action.device.fqdn })
+      }
+
       return {
         ...state,
-        connect: {}
+        devicesAndroid: devicesAndroid,
+        devicesiOS: devicesiOS,
+        connect: { ...state.connect, data: {}}
       }
 
     default:
@@ -36,6 +51,6 @@ function connection (state = { devicesAndroid: [], devicesiOS: [], connect: { da
   }
 }
 
-const reduxMonitorReducer = combineReducers({ connection })
+const SuasMonitorReducer = combineReducers({ connection })
 
-export default reduxMonitorReducer
+export default SuasMonitorReducer

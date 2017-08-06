@@ -8,11 +8,11 @@ import { createDevTools } from 'redux-devtools'
 import { createStore, compose, Reducer } from 'redux'
 import ConnectionService from '../services/ConnectionService'
 
-interface IReduxMonitorComponentProps {
+interface ISuasMonitorComponentProps {
   device: any
 }
 
-export default class ReduxMonitorComponent extends React.Component<IReduxMonitorComponentProps, any> {
+export default class SuasMonitorComponent extends React.Component<ISuasMonitorComponentProps, any> {
   connectionService: ConnectionService
   devtools: any
 
@@ -27,7 +27,16 @@ export default class ReduxMonitorComponent extends React.Component<IReduxMonitor
   }
 
   componentWillUpdate (nextProps, nextState) {
-    if (!(JSON.stringify(nextState.device) === JSON.stringify(nextProps.device))) {
+
+    if (JSON.stringify(nextState.device) === JSON.stringify(nextProps.device)) {
+      // Data is similar, skip
+      return
+    }
+
+    let hasData = Object.keys(nextProps.device.data).length > 0
+
+    if (hasData) {
+      // New device connected
       console.log('CREATE STORE AND STUFF')
       this.connectionService.closeConnection()
 
@@ -38,18 +47,28 @@ export default class ReduxMonitorComponent extends React.Component<IReduxMonitor
 
       const { type, data } = nextProps.device
 
-      this.connectionService.connectToDevice(type, data, data => {
-        let newState = data['state']
-        let actionType = data['action']
-        let actionData = data['actionData'] || {}
+      this.connectionService.connectToDevice(type, data,
+        (data) => {
+          let newState = data['state']
+          let actionType = data['action']
+          let actionData = data['actionData'] || {}
 
-        this.state.store.dispatch({
-          type: actionType, data: { actionData, newState }
-        })
+          this.state.store.dispatch({
+            type: actionType, data: { actionData, newState }
+          })
+        },
+        (type, device) => {
+          nextProps.disconnect(type, device)
+        }
+      )
+    } else {
+      // Other? device disconnectedx
+      this.setState({
+        ...this.state,
+        device: nextProps.device
       })
-
-      this.state.store.dispatch({ type: 'RESET', data: {} })
     }
+
   }
 
   createMirrorStore (devtools) {
@@ -75,9 +94,9 @@ export default class ReduxMonitorComponent extends React.Component<IReduxMonitor
         changePositionKey='ctrl-q'
         changeMonitorKey='ctrl-m'
         defaultIsVisible={true}
-        defaultSize={0.5}
+        defaultSize={0.8}
       >
-        <ChartMonitor transitionDuration={500} widthBetweenNodesCoeff={0.5} heightBetweenNodesCoeff={1.5} />
+        <ChartMonitor transitionDuration={500} widthBetweenNodesCoeff={1} heightBetweenNodesCoeff={1.3} />
         <Inspector />
         <DiffMonitor />
       </DockMonitor>
