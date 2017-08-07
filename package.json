@@ -9,6 +9,7 @@
     "lint": "tslint --type-check --project tsconfig.json",
     "start": "NODE_ENV=production && electron .",
     "test": "jest",
+    "update-jest": "jest --updateSnapshot",
     "package-mac": "electron-packager . Suas-Monitor --platform=darwin --arch=x64 --out ./out/build/ --app-version 0.1.0 --overwrite --icon=./assets/icon/icon.icns",
     "package-win-32": "electron-packager . Suas-Monitor --platform=win32 --arch=ia32 --out ./out/build/ --app-version 0.1.0 --overwrite",
     "package-linux-32": "electron-packager . Suas-Monitor --platform=linux --arch=ia32 --out ./out/build/ --app-version 0.1.0 --overwrite --icon=./assets/icon/icon.icns",
