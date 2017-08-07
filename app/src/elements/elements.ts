@@ -39,10 +39,7 @@ export const Title = styled.div`
   border-bottom: 1px solid #CF639A;
 `
 
-export const BottomButton = styled.image`
-  position: absolute;
-  left:    0px;
-  bottom:   0px;
+export const BottomButton = styled.div`
   background-image: url('assets/change-monitor.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -54,6 +51,15 @@ export const BottomButton = styled.image`
     background-image: url('assets/change-monitor-white.svg');
     background-color: #CF639A;
   }
+  position: relative;
+`
+
+export const ButtonsHolder = styled.div`
+  position: absolute;
+  left:    0px;
+  bottom:   0px;
+  width: 100%;
+  height: 38px;
 `
 
 export const FullHeightDiv = styled.div`

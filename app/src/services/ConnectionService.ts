@@ -18,9 +18,9 @@ export default class ConnectionService {
     }
 
     // When we start a connection it sends the close, but async
-    // We set the closing to 10 milliseconds and reset the reason to be not manual
+    // We set the closing to 100 milliseconds and reset the reason to be not manual
     // There are better ways to sovlve this. Sure, this is good enough I think.
-    setTimeout(() => { this.isManualClosing = false }, 10)
+    setTimeout(() => { this.isManualClosing = false }, 100)
   }
 
   closeConnection = () => {
