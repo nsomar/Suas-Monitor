@@ -103,7 +103,7 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
         changePositionKey='ctrl-q'
         changeMonitorKey='ctrl-m'
         defaultIsVisible={true}
-        defaultSize={0.8}
+        defaultSize={0.82}
       >
         <ChartMonitor transitionDuration={500} widthBetweenNodesCoeff={1} heightBetweenNodesCoeff={1.3} />
         <Inspector />

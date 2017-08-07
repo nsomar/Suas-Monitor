@@ -16,12 +16,12 @@ export const Device = styled.div`
 `
 
 export const DeviceName = styled.div`
-  padding-left: 0.6em;
+  padding-left: 0.9em;
   font-size: 15px;
 `
 
 export const DeviceType = styled.div`
-  padding-left: 0.7em;
+  padding-left: 1em;
   font-size: 13px;
   font-weight: 600;
   color: ${props => props.selected ? 'white' : '#292929'};
