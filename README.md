@@ -12,14 +12,24 @@ Check how you can start using `Suas` in your apps:
 
 Read more from [Suas Website](https://suaswebsite)
 
-### Installation  
+### Running  
+
+To run the development build
+
+```
+npm i
+npm run deb
+```
 
 To run the production build
+
 ```
 npm run build && npm start
 ```
 
 ### Packaging
+
+Make sure you have npm version 5.2 (version 5.3 has a problem when packaging).
 
 Prerequisite On Mac, Make sure you have wine:
 
@@ -56,4 +66,3 @@ Package all versions
 ```
 npm run package
 ```
-
