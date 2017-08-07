@@ -1,10 +1,5 @@
 import React = require('react')
-import styled from 'styled-components'
-
-const TableRow = styled.tr`
-  padding: 4em;
-  background: ${props => props.selected ? '#F4F5F6' : 'white' };
-`
+import { Device, Title, DeviceName, DeviceType } from '../elements/elements'
 
 interface IDeviceListComponentProps {
   bonjourDevices: Array<any>,
@@ -37,28 +32,29 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
     ]
 
     return <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Platform</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div>
+        <Title>
+          Applications
+        </Title>
+        <div>
           {
-            datasource.map((item, i) => <TableRow
+            datasource.map((item, i) => <Device
               onClick={() => {
                 this.onDeviceSelected(item)
               }}
               key={i}
               selected={item.selected}
             >
-              <td>{item.name}</td>
-              <td>{item.platform}</td>
-            </TableRow>)
+              <DeviceName>
+              {item.name}
+              </DeviceName>
+              <DeviceType selected={item.selected}>
+              {item.platform}
+              </DeviceType>
+            </Device>)
           }
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   }
 }
