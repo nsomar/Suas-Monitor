@@ -1,6 +1,7 @@
 import React = require('react')
 import ReactModal from 'react-modal'
 import { InlineImage, Header1, Header2, ShortcutKey, ListItem, List } from '../elements/elements'
+import { showNotification } from '../services/Notification'
 
 interface IDeviceListComponentProps {
   bonjourDevices: Array<any>,
@@ -32,21 +33,20 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
     this.state = { isVisible: false }
   }
 
+  componentDidMount () {
+    showNotification({text: 'Press on \'?\' or \'h\' key at any time for Help'})
+  }
+
   _handleKeyDown = (event) => {
-    switch (event.keyCode) {
-      case H_LETTER_KEY:
-      case QUESTION_MARK_KEY:
-        this.setState({
-          isVisible: !this.state.isVisible
-        })
-        break
-      case ESCAPE_KEY:
-        this.setState({
-          isVisible: false
-        })
-        break
-      default:
-        break
+    if ((event.keyCode === H_LETTER_KEY) ||
+      (event.keyCode === QUESTION_MARK_KEY && event.shiftKey)) {
+      this.setState({
+        isVisible: !this.state.isVisible
+      })
+    } else if (event.keyCode === H_LETTER_KEY) {
+      this.setState({
+        isVisible: false
+      })
     }
   }
 
@@ -77,7 +77,7 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
 
       <Header2>Keyboard Shortcuts</Header2>
       <List>
-        <ListItem><ShortcutKey>Ctrl + m</ShortcutKey>: Cycle Suas Monitor types</ListItem>
+        <ListItem><ShortcutKey>m</ShortcutKey>: Cycle Suas Monitor types</ListItem>
         <ListItem><ShortcutKey>?</ShortcutKey> / <ShortcutKey>h</ShortcutKey>: Toggle help dialog (this dialog)</ListItem>
         <ListItem><ShortcutKey>esc</ShortcutKey>: Close this dialog</ListItem>
       </List>

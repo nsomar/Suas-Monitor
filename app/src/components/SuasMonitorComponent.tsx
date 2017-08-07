@@ -7,6 +7,8 @@ import { Provider } from 'react-redux'
 import { createDevTools } from 'redux-devtools'
 import { createStore, compose, Reducer } from 'redux'
 import ConnectionService from '../services/ConnectionService'
+import { showNotification } from '../services/Notification'
+import { displayName } from '../services/DeviceUtils'
 
 interface ISuasMonitorComponentProps {
   device: any
@@ -61,6 +63,9 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
     this.connectionService.connectToDevice({
       type,
       device: data,
+      onConnection: (type, device) => {
+        showNotification({ text: `Connection to '${displayName(type, device)}' app established`, timeout: 2500})
+      },
       onData: (data) => {
         let newState = data['state']
         let actionType = data['action']
@@ -72,10 +77,12 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
       },
       onCloseConnection: (isManualClosing, type, device) => {
         if (!isManualClosing) {
+          showNotification({ text: `Connection to '${displayName(type, device)}' app terminated`, timeout: 2500})
           disconnect(type, device)
         }
       },
       onError: (type, device) => {
+        showNotification({ text: `Connection to '${displayName(type, device)}' app failed`, style: 'error', timeout: 2500})
         disconnect(type, device)
       }
     })
@@ -101,7 +108,7 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
       <DockMonitor
         toggleVisibilityKey='ctrl-h'
         changePositionKey='ctrl-q'
-        changeMonitorKey='ctrl-m'
+        changeMonitorKey='m'
         defaultIsVisible={true}
         defaultSize={0.82}
       >

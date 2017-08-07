@@ -1,17 +1,22 @@
 import { connectToProcess } from './AdbService'
 import { openSocketToBonjour } from './BonjourService'
+import { showNotification } from '../services/Notification'
 
 export default class ConnectionService {
   connection?: any
   isManualClosing: boolean
 
-  connectToDevice = ({type, device, onData, onCloseConnection, onError}) => {
+  connectToDevice = ({type, device, onConnection, onData, onCloseConnection, onError}) => {
     if (type === 'adb') {
       connectToProcess(device.name, (socket) => {
         this.listenToSocket(socket, onData)
+        this.listenToConnectionEstablished(socket, type, device, onConnection)
+        this.listenToDisconnect(socket, type, device, onCloseConnection)
+        this.listenToError(socket, type, device, onError)
       })
     } else if (type === 'bonjour') {
       let socket = openSocketToBonjour(device.host, device.port)
+      this.listenToConnectionEstablished(socket, type, device, onConnection)
       this.listenToSocket(socket, onData)
       this.listenToDisconnect(socket, type, device, onCloseConnection)
       this.listenToError(socket, type, device, onError)
@@ -38,6 +43,12 @@ export default class ConnectionService {
 
   listenToError = (socket, type, device, callback) => {
     socket.on('error', (_) => {
+      callback(type, device)
+    })
+  }
+
+  listenToConnectionEstablished = (socket, type, device, callback) => {
+    socket.on('connect', () => {
       callback(type, device)
     })
   }

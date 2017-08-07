@@ -4,7 +4,7 @@ let simulateKeyDown = (key) => {
   e.keyCode = e.key.charCodeAt(0)
   e.which = e.keyCode
   e.altKey = false
-  e.ctrlKey = true
+  e.ctrlKey = false
   e.shiftKey = false
   e.metaKey = false
   window.dispatchEvent(e)
