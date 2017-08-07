@@ -64,7 +64,7 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
       type,
       device: data,
       onConnection: (type, device) => {
-        showNotification({ text: `Connection to '${displayName(type, device)}' app established`, timeout: 3000})
+        showNotification({ text: `🙌 Connection to '${displayName(type, device)}' app established`, timeout: 3000})
       },
       onData: (data) => {
         let newState = data['state']
@@ -77,12 +77,12 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
       },
       onCloseConnection: (isManualClosing, type, device) => {
         if (!isManualClosing) {
-          showNotification({ text: `Connection to '${displayName(type, device)}' app terminated`, timeout: 3000})
+          showNotification({ text: `👌 Connection to '${displayName(type, device)}' app terminated`, timeout: 3000})
           disconnect(type, device)
         }
       },
       onError: (type, device) => {
-        showNotification({ text: `Connection to '${displayName(type, device)}' app failed`, style: 'error', timeout: 3000})
+        showNotification({ text: `😓 Connection to '${displayName(type, device)}' app failed`, style: 'error', timeout: 3000})
         disconnect(type, device)
       }
     })

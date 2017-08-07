@@ -34,7 +34,7 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
   }
 
   componentDidMount () {
-    showNotification({text: 'Press on \'?\' or \'h\' key at any time for Help'})
+    showNotification({ text: '🤔 Press on \'?\' or \'h\' key at any time for Help'})
   }
 
   _handleKeyDown = (event) => {
