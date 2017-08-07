@@ -43,7 +43,7 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
       this.setState({
         isVisible: !this.state.isVisible
       })
-    } else if (event.keyCode === H_LETTER_KEY) {
+    } else if (event.keyCode === ESCAPE_KEY) {
       this.setState({
         isVisible: false
       })

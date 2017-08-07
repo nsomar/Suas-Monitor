@@ -1,6 +1,5 @@
 import { connectToProcess } from './AdbService'
 import { openSocketToBonjour } from './BonjourService'
-import { showNotification } from '../services/Notification'
 
 export default class ConnectionService {
   connection?: any
