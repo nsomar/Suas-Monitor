@@ -38,3 +38,24 @@ export const Title = styled.div`
   color: #CF639A;
   border-bottom: 1px solid #CF639A;
 `
+
+export const BottomButton = styled.image`
+  position: absolute;
+  left:    0px;
+  bottom:   0px;
+  background-image: url('assets/change-monitor.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 25px 25px;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  &:hover {
+    background-image: url('assets/change-monitor-white.svg');
+    background-color: #CF639A;
+  }
+`
+
+export const FullHeightDiv = styled.div`
+  height: 100%;
+`
