@@ -1,15 +1,18 @@
 import styled from 'styled-components'
 
 export const Device = styled.div`
-  background: ${props => props.selected ? '#5A8DFB' : 'white'};
+  ${props => props.selected ?
+    'background-image: linear-gradient(-180deg, #5A8DFB -30%, #CF639A 130%);' :
+    'background: white'
+  };
   color: ${props => props.selected ? 'white' : 'black'};
   font-weight: ${props => props.selected ? '600' : '400'};
   text-align: left;
   padding: 0px;
-  padding-bottom: 14px;
-  padding-top: 14px;
+  padding-bottom: 16px;
+  padding-top: 16px;
   border-bottom: 1px solid #F4F5F6;
-  line-height: 18px;
+  line-height: 16px;
 `
 
 export const DeviceName = styled.div`
