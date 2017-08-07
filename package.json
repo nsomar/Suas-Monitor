@@ -70,6 +70,7 @@
     "normalize.css": "^7.0.0",
     "react": "^15.0.0",
     "react-dom": "^15.6.1",
+    "react-modal": "^2.2.2",
     "react-redux": "^5.0.5",
     "react-tooltip": "^3.3.0",
     "redux": "^3.7.2",

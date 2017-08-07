@@ -1,5 +1,5 @@
 import React = require('react')
-import { Device, Title, DeviceName, DeviceType } from '../elements/elements'
+import { Device, Title, DeviceName, DeviceType, DevicesHolder } from '../elements/elements'
 
 interface IDeviceListComponentProps {
   bonjourDevices: Array<any>,
@@ -31,7 +31,7 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
       ...bonjourDevices.map(d => ({ name: d.name, platform: 'Bonjour', data: d, selected: this.isSelectedDevice(d.name) }))
     ]
 
-    return <div>
+    return <DevicesHolder>
         <Title>
           Applications
         </Title>
@@ -53,6 +53,6 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
             </Device>)
           }
         </div>
-    </div>
+    </DevicesHolder>
   }
 }

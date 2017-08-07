@@ -15,6 +15,12 @@ export const Device = styled.div`
   line-height: 16px;
 `
 
+export const DevicesHolder = styled.div`
+  margin-bottom: 38px;
+  hft: 111;
+`
+
+
 export const DeviceName = styled.div`
   padding-left: 0.9em;
   font-size: 15px;
@@ -44,9 +50,10 @@ export const BottomButton = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: 25px 25px;
-  width: 38px;
-  height: 38px;
+  width: 37px;
+  height: 37px;
   cursor: pointer;
+  background-color: white;
   &:hover {
     background-image: url('assets/change-monitor-white.svg');
     background-color: #CF639A;
@@ -55,11 +62,12 @@ export const BottomButton = styled.div`
 `
 
 export const ButtonsHolder = styled.div`
-  position: absolute;
+  position: fixed;
   left:    0px;
   bottom:   0px;
   width: 100%;
-  height: 38px;
+  height: 37px;
+  background-color: rgba(255, 255, 255, 0.8);
 `
 
 export const FullHeightDiv = styled.div`
