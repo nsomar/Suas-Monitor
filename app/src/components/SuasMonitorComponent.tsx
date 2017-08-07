@@ -46,23 +46,7 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
       })
 
       const { type, data } = nextProps.device
-
-      this.connectionService.connectToDevice(type, data,
-        (data) => {
-          let newState = data['state']
-          let actionType = data['action']
-          let actionData = data['actionData'] || {}
-
-          this.state.store.dispatch({
-            type: actionType, data: { actionData, newState }
-          })
-        },
-        (isManualClosing, type, device) => {
-          if (!isManualClosing) {
-            nextProps.disconnect(type, device)
-          }
-        }
-      )
+      this.connectToDevice(type, data, nextProps.disconnect)
     } else {
       // Other? device disconnectedx
       this.setState({
@@ -73,6 +57,29 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
 
   }
 
+  connectToDevice (type, data, disconnect) {
+    this.connectionService.connectToDevice({
+      type,
+      device: data,
+      onData: (data) => {
+        let newState = data['state']
+        let actionType = data['action']
+        let actionData = data['actionData'] || {}
+
+        this.state.store.dispatch({
+          type: actionType, data: { actionData, newState }
+        })
+      },
+      onCloseConnection: (isManualClosing, type, device) => {
+        if (!isManualClosing) {
+          disconnect(type, device)
+        }
+      },
+      onError: (type, device) => {
+        disconnect(type, device)
+      }
+    })
+  }
   createMirrorStore (devtools) {
     let reducer: Reducer<any> = (state = { data: {} }, action) => {
       const { data } = action

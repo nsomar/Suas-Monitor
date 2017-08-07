@@ -5,7 +5,7 @@ export default class ConnectionService {
   connection?: any
   isManualClosing: boolean
 
-  connectToDevice = (type, device, onData, onCloseConnection) => {
+  connectToDevice = ({type, device, onData, onCloseConnection, onError}) => {
     if (type === 'adb') {
       connectToProcess(device.name, (socket) => {
         this.listenToSocket(socket, onData)
@@ -14,6 +14,7 @@ export default class ConnectionService {
       let socket = openSocketToBonjour(device.host, device.port)
       this.listenToSocket(socket, onData)
       this.listenToDisconnect(socket, type, device, onCloseConnection)
+      this.listenToError(socket, type, device, onError)
     }
 
     // When we start a connection it sends the close, but async
@@ -32,6 +33,12 @@ export default class ConnectionService {
   listenToDisconnect = (socket, type, device, callback) => {
     socket.on('close', (_) => {
       callback(this.isManualClosing, type, device)
+    })
+  }
+
+  listenToError = (socket, type, device, callback) => {
+    socket.on('error', (_) => {
+      callback(type, device)
     })
   }
 
