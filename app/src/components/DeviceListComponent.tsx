@@ -32,7 +32,6 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
     ]
 
     return <div>
-      <div>
         <Title>
           Applications
         </Title>
@@ -54,7 +53,6 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
             </Device>)
           }
         </div>
-      </div>
     </div>
   }
 }

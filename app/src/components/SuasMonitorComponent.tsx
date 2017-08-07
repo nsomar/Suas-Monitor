@@ -57,8 +57,10 @@ export default class SuasMonitorComponent extends React.Component<ISuasMonitorCo
             type: actionType, data: { actionData, newState }
           })
         },
-        (type, device) => {
-          nextProps.disconnect(type, device)
+        (isManualClosing, type, device) => {
+          if (!isManualClosing) {
+            nextProps.disconnect(type, device)
+          }
         }
       )
     } else {
