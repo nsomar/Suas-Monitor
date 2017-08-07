@@ -14,4 +14,46 @@ Read more from [Suas Website](https://suaswebsite)
 
 ### Installation  
 
-Download the lastest from releases.
+To run the production build
+```
+npm run build && npm start
+```
+
+### Packaging
+
+Prerequisite On Mac, Make sure you have wine:
+
+```
+brew cask install xquartz
+brew install wine
+```
+
+Scripts:
+
+Package mac app
+```
+npm run package-mac
+```
+
+Package mac app and zip it
+```
+npm run package-mac-zip
+```
+
+Package a windows app
+```
+npm run package-win-32
+npm run package-win-64
+```
+
+Package a linux app
+```
+npm run package-linux-32
+npm run package-linux-64
+```
+
+Package all versions
+```
+npm run package
+```
+

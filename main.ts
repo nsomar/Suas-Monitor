@@ -10,7 +10,8 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
-    y: 0
+    y: 0,
+    icon: path.join(__dirname, 'assets/icon/png/64x64.png')
   })
 
   mainWindow.loadURL(url.format({

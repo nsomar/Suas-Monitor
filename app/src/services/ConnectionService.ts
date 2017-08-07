@@ -3,9 +3,9 @@ import { openSocketToBonjour } from './BonjourService'
 
 export default class ConnectionService {
   connection?: any
+  isManualClosing: boolean
 
-  connectToDevice = (type, device, onData, onCloseConnection) => {
-
+  connectToDevice = ({type, device, onData, onCloseConnection, onError}) => {
     if (type === 'adb') {
       connectToProcess(device.name, (socket) => {
         this.listenToSocket(socket, onData)
@@ -14,15 +14,30 @@ export default class ConnectionService {
       let socket = openSocketToBonjour(device.host, device.port)
       this.listenToSocket(socket, onData)
       this.listenToDisconnect(socket, type, device, onCloseConnection)
+      this.listenToError(socket, type, device, onError)
     }
+
+    // When we start a connection it sends the close, but async
+    // We set the closing to 10 milliseconds and reset the reason to be not manual
+    // There are better ways to sovlve this. Sure, this is good enough I think.
+    setTimeout(() => { this.isManualClosing = false }, 10)
   }
 
   closeConnection = () => {
+    // We stop listening when we close the connection by hand
+    this.isManualClosing = true
+
     if (this.connection) this.connection.end()
   }
 
   listenToDisconnect = (socket, type, device, callback) => {
     socket.on('close', (_) => {
+      callback(this.isManualClosing, type, device)
+    })
+  }
+
+  listenToError = (socket, type, device, callback) => {
+    socket.on('error', (_) => {
       callback(type, device)
     })
   }

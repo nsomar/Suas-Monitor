@@ -2,18 +2,11 @@
 
 exports[`renders device list 1`] = `
 <div>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Platform
-        </th>
-      </tr>
-    </thead>
-    <tbody />
-  </table>
+  <div
+    className="sc-bxivhb fRiZeA"
+  >
+    Applications
+  </div>
+  <div />
 </div>
 `;
