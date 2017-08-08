@@ -14,7 +14,7 @@ function connection (state = { devicesAndroid: [], devicesBonjour: [], connect: 
 
     case DEVICE_DISCOVERED_BONJOUR:
       // Remove old device with same fqdn
-      let devices = [...removeDevice(state.devicesBonjour, action.device), action.device]
+      let devices = [...removeBonjourDevice(state.devicesBonjour, action.device), action.device]
 
       return {
         ...state,
@@ -31,7 +31,8 @@ function connection (state = { devicesAndroid: [], devicesBonjour: [], connect: 
       return {
         ...state,
         devicesAndroid: state.devicesAndroid,
-        devicesBonjour: removeDevice(state.devicesBonjour, action.device),
+        // TODO: do we need to handle android disconnections?
+        devicesBonjour: removeBonjourDevice(state.devicesBonjour, action.device),
         connect: { ...state.connect, data: {}}
       }
 
@@ -40,7 +41,7 @@ function connection (state = { devicesAndroid: [], devicesBonjour: [], connect: 
   }
 }
 
-function removeDevice (devices, device) {
+function removeBonjourDevice (devices, device) {
   return devices.filter((d: any) => { return d.fqdn !== device.fqdn })
 }
 

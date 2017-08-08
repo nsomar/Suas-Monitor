@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders device list 1`] = `
-<div>
+<div
+  className="sc-bwzfXH kwwIOK"
+>
   <div
-    className="sc-bxivhb fRiZeA"
+    className="sc-ifAKCX jXmpmh"
   >
     Applications
   </div>
