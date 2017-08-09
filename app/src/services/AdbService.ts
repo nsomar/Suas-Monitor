@@ -4,8 +4,10 @@ export function findAdbDevices (callback) {
   let c = client()
   selectService(c, 'host:devices', true, function (result) {
     let devices = result.substring(8).trim().split('\n')
+      .filter(d => d !== '')
       .map(d => d.split('\t'))
       .map(d => ({ name: d[0], type: d[1] }))
+
     callback(devices)
     c.end()
   })
@@ -67,24 +69,27 @@ function selectService (socket: net.Socket, service, waitForEnd, result) {
 
   socket.write(msg)
 
-  let end = listenerParam => {
-    socket.removeListener('data', listenerParam)
-    socket.removeListener('end', end)
+  let end = () => {
+    socket.removeAllListeners()
     result(endResult)
   }
 
-  let listener = data => {
+  let dataListener = data => {
     let output = ab2str(data)
     if (!waitForEnd) {
-      end(listener)
+      end()
       return
     }
 
     endResult += output
   }
 
-  socket.on('data', listener)
-  socket.on('end', end)
+  let endListener = () => {
+    end()
+  }
+
+  socket.on('data', dataListener)
+  socket.on('end', endListener)
 }
 
 function client () {
