@@ -2,6 +2,9 @@
 
 ![Screenshot](/misc/logo.png?raw=true)
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://raw.githubusercontent.com/zendesk/Suas-Monitor/master/LICENSE?token=AIff-ulIVSOIggwhz1xa9Iu_tLZ1gvcbks5ZlwIewA%3D%3D)
+[![Join the chat at https://gitter.im/SuasArch/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/SuasArch/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Suas Monitor is a cross-platform desktop application that helps visualizing and debugging the state and actions of apps built with [Suas](https://suaswebsite). Check this [video for a demo](https://www.youtube.com/watch?v=fvblSw8tG3k)
 
 ![Screenshot](/misc/screenshot.png?raw=true)
