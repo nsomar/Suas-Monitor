@@ -13,6 +13,7 @@ interface IDeviceListComponentProps {
 let H_LETTER_KEY = 72
 let QUESTION_MARK_KEY = 191
 let ESCAPE_KEY = 27
+let R_LETTER_KEY = 82
 
 let modalStyle = {
   overlay: { zIndex: 999999999, backgroundColor: 'rgba(255, 255, 255, 0.6)'},
@@ -38,6 +39,7 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
   }
 
   _handleKeyDown = (event) => {
+    // Ctrl+R is handled in app main.ts
     if ((event.keyCode === H_LETTER_KEY) ||
       (event.keyCode === QUESTION_MARK_KEY && event.shiftKey)) {
       this.setState({
@@ -80,6 +82,7 @@ export default class DeviceListComponent extends React.Component<IDeviceListComp
         <ListItem><ShortcutKey>m</ShortcutKey>: Cycle Suas Monitor types</ListItem>
         <ListItem><ShortcutKey>?</ShortcutKey> / <ShortcutKey>h</ShortcutKey>: Toggle help dialog (this dialog)</ListItem>
         <ListItem><ShortcutKey>esc</ShortcutKey>: Close this dialog</ListItem>
+        <ListItem><ShortcutKey>Ctrl + r</ShortcutKey>: Reload/Releaunch Suas Monitor app</ListItem>
       </List>
     </ReactModal>
   }

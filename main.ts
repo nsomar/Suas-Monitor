@@ -1,7 +1,7 @@
 const electron = require('electron')
 const path = require('path')
 const url = require('url')
-const { app, BrowserWindow } = electron
+const { app, BrowserWindow, globalShortcut } = electron
 
 let mainWindow
 let isDevelopment = process.env.NODE_ENV === 'development'
@@ -24,6 +24,10 @@ function createWindow () {
 
   mainWindow.on('closed', () => {
     mainWindow = null
+  })
+
+  globalShortcut.register('Control+R', () => {
+    createWindow()
   })
 }
 
