@@ -39,7 +39,8 @@ macOS prebuilt binary can be found on [GitHub release page](https://github.com/z
 You can also install it using [Homebrew](https://brew.sh):
 
 ```
-brew install zendesk/tap/suas-monitor
+brew tap zendesk/tap
+brew cask install suas-monitor
 ```
 
 # Building from source
