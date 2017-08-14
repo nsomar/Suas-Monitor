@@ -27,7 +27,7 @@ function createWindow () {
   })
 
   globalShortcut.register('Control+R', () => {
-    createWindow()
+    mainWindow.reload()
   })
 }
 
