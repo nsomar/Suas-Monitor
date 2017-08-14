@@ -13,7 +13,6 @@ interface IDeviceListComponentProps {
 let H_LETTER_KEY = 72
 let QUESTION_MARK_KEY = 191
 let ESCAPE_KEY = 27
-let R_LETTER_KEY = 82
 
 let modalStyle = {
   overlay: { zIndex: 999999999, backgroundColor: 'rgba(255, 255, 255, 0.6)'},
