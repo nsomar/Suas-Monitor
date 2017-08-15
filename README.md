@@ -119,6 +119,20 @@ Feel free to suggest changes on the GitHub repos or directly [in Saus gitter cha
 
 For reference check our [contributing](https://suas.readme.io/docs/contributing) guidelines.
 
+
+# Contact us
+
+Join our [gitter channel](https://gitter.im/SuasArch/Lobby) to talk to other Suas developers.
+
+For any question, suggestion, or just to say hi, you can find the core team on twitter:
+
+- [Omar Abdelhafith](https://twitter.com/ifnottrue) 
+- [Sebastian Chlan](https://twitter.com/sebchlan) 
+- [Steven Diviney](https://twitter.com/DivoDivenson) 
+- [Giacomo Rebonato](https://twitter.com/GiacomoRebonato)
+- [Elvis Porebski](https://twitter.com/eepdev) 
+- [Vitor Nunes](https://twitter.com/@vitornovictor)
+
 # Suas future
 
 To help craft Suas future releases, join us on [gitter channel](https://gitter.im/SuasArch/Lobby).
