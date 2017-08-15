@@ -17,7 +17,6 @@ export const Device = styled.div`
 
 export const DevicesHolder = styled.div`
   margin-bottom: 38px;
-  hft: 111;
 `
 
 export const DeviceName = styled.div`
