@@ -42,7 +42,7 @@
       "**/__tests__/*.(ts|tsx|js)"
     ]
   },
-  "license": "MIT",
+  "license": "Apache License 2.0",
   "devDependencies": {
     "@types/bonjour": "^3.5.4",
     "@types/jest": "^20.0.4",
