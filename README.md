@@ -2,7 +2,7 @@
 <a href="http://imgur.com/a0IkBEX"><img src="http://i.imgur.com/a0IkBEX.png" title="source: imgur.com" /></a>
 </p>
 <p align="center">
-<a href="https://travis-ci.com/zendesk/Suas-Monitor"><img src="https://travis-ci.com/zendesk/Suas-Monitor.svg?token=iTfSE3QQamPUFfPk3VRD&amp;branch=master" alt="Build Status" /></a>
+<a href="https://travis-ci.org/zendesk/Suas-Monitor"><img src="https://travis-ci.org/zendesk/Suas-Monitor.svg?token=iTfSE3QQamPUFfPk3VRD&amp;branch=master" alt="Build Status" /></a>
 <a href="https://raw.githubusercontent.com/zendesk/Suas-iOS/master/LICENSE?token=AIff-oX-dNf-KBOKyXYPRP9yto5D246gks5ZlwP7wA%3D%3D"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License" /></a>
 <a href="https://gitter.im/SuasArch/Lobby?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/SuasArch/Lobby" /></a>
 </p>
